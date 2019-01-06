@@ -1,5 +1,18 @@
 開発環境メモ
 
+初のOSではLalavelをインストールする
+$composer global require "laravel/installer=~1.1
+
+###################################################
+アパッチについて　ローテート出来ない場合
+mod_rewriteの有効化
+sudo a2enmod rewrite
+
+.htaccess有効化
+AllowOverride All
+###################################################
+
+
 
 gitについて
 　・Laravelはプロジェクトを作ると、.gitignoreが既に作成されており、内容が、
@@ -10,24 +23,38 @@ gitについて
 　Homestead.json
 　.env
 　となっている。無視されるファイルは初期状態では下記のような状態。
-
 　/vendorは各環境で
    
 　php composer.phar install
    composerのインストールは(php -r "readfile('https://getcomposer.org/installer');" | php)
 
+   composerのコピー
+   mv composer.phar /usr/local/bin/composer
 　する
+###################################################
+プロジェクト作成
+###################################################
+composer create-project laravel/laravel /var/www/html/sample --prefer-dist
+# アクセス権を変更
+$ chmod -R 777 /var/www/html/sample
+Application key [base64:yecRGg9JtgAR8uL679Ak5LlvMWpKLlNEQIY2mrYh7m0=] set successfully.
+
 
 　
 git init
 git add .
 git commit -m "first commit"
 git config --global http.proxy http://www-proxy.sra.co.jp:80
-git remote add origin https://github.com/aki4722/medaka_01.git
+git remote add origin https://github.com/aki4722/medaka_02.git
 git push -u origin master
+エラーが出たら
+　git remote set-url origin https://github.com/aki4722/medaka_02.git
+
 
 //取得
 git clone https://github.com/aki4722/medaka_02.git
+cp .env.example .env
+git pull origin master
 
 マイグレートについて
 
@@ -42,6 +69,10 @@ php artisan migrate
 プログラムを対話的に使う
 php artisan tinker で、Laravel
 
+
+update user set authentication_string=PASSWORD('bfrr1717') where User=‘root';
+update mysql.user set password=password('bfrr1717') where user = 'root';
+flush privileges;
 
 VSCでデバッグ設定
 　「Visual Studio Code」のインストール
@@ -72,7 +103,9 @@ xdebug.idekey = "phpstorm"
 
 
 
+apatile2の話
+$ sudo service apache2 restart
 
 
 
-
+windows sudo etherwake 80:EE:73:98:1F:8A
